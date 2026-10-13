@@ -1,0 +1,199 @@
+Mage Skate — Project Structure
+
+Mage Skate is a 2D/3D skateboarding action game built with the Godot Engine. The project is organized into modular systems to support player movement, spellcasting, combat, perspective switching, level progression, and UI.
+
+Directory Overview
+
+MageSkate/
+│
+├── project.godot                 # Godot project configuration
+├── .gitignore                    # Git ignore rules
+│
+├── assets/                       # Game assets
+│   ├── characters/
+│   │   ├── player/
+│   │   ├── enemies/
+│   │   └── bosses/
+│   ├── environments/
+│   │   ├── elemental_tower/
+│   │   ├── wicked_forest/
+│   │   └── lost_necropolis/
+│   ├── spells/
+│   ├── ui/
+│   ├── audio/
+│   │   ├── music/
+│   │   └── sfx/
+│   └── fonts/
+│
+├── scenes/                       # Godot scenes (.tscn)
+│   ├── main/
+│   │   └── main.tscn
+│   ├── menus/
+│   │   ├── title_screen.tscn
+│   │   ├── settings_menu.tscn
+│   │   ├── pause_menu.tscn
+│   │   └── credits.tscn
+│   ├── player/
+│   │   ├── player_2d.tscn
+│   │   └── player_3d.tscn
+│   ├── worlds/
+│   │   ├── elemental_tower/
+│   │   │   ├── level_1.tscn
+│   │   │   ├── level_2.tscn
+│   │   │   └── boss_level.tscn
+│   │   ├── wicked_forest/
+│   │   │   ├── level_1.tscn
+│   │   │   ├── level_2.tscn
+│   │   │   └── boss_level.tscn
+│   │   └── lost_necropolis/
+│   │       ├── level_1.tscn
+│   │       ├── level_2.tscn
+│   │       └── boss_level.tscn
+│   ├── spells/
+│   ├── enemies/
+│   ├── bosses/
+│   └── ui/
+│
+├── scripts/                      # GDScript gameplay logic
+│   ├── core/                     # Global game systems
+│   │   ├── game_manager.gd
+│   │   ├── level_manager.gd
+│   │   ├── save_manager.gd
+│   │   └── scene_transition.gd
+│   │
+│   ├── player/                   # Player control and stats
+│   │   ├── player_controller_2d.gd
+│   │   ├── player_controller_3d.gd
+│   │   ├── player_stats.gd
+│   │   ├── player_health.gd
+│   │   └── player_spell_manager.gd
+│   │
+│   ├── movement/                 # Skateboarding mechanics
+│   │   ├── skate_movement.gd
+│   │   ├── trick_system.gd
+│   │   └── movement_physics.gd
+│   │
+│   ├── perspective/              # 2D/3D perspective switching
+│   │   ├── perspective_manager.gd
+│   │   └── perspective_shift.gd
+│   │
+│   ├── spells/                   # Spellcasting system
+│   │   ├── spell_base.gd
+│   │   ├── spell_manager.gd
+│   │   ├── thunderbolt.gd
+│   │   ├── fireball.gd
+│   │   ├── time_stop.gd
+│   │   ├── raise_dead.gd
+│   │   ├── plant_growth.gd
+│   │   ├── ricochet_shot.gd
+│   │   └── ice_spray.gd
+│   │
+│   ├── combat/                   # Health and damage
+│   │   ├── health_component.gd
+│   │   ├── damage_component.gd
+│   │   └── hitbox.gd
+│   │
+│   ├── enemies/                  # Enemy behavior
+│   │   ├── enemy_base.gd
+│   │   ├── enemy_controller.gd
+│   │   └── enemy_spawner.gd
+│   │
+│   ├── bosses/                   # Boss encounters
+│   │   ├── boss_base.gd
+│   │   └── boss_phase_manager.gd
+│   │
+│   ├── resources/                # Mana and resource regeneration
+│   │   ├── mana_manager.gd
+│   │   └── resource_regeneration.gd
+│   │
+│   ├── world/                    # Levels and puzzle interactions
+│   │   ├── level_exit.gd
+│   │   ├── checkpoint.gd
+│   │   ├── destructible_block.gd
+│   │   ├── puzzle_manager.gd
+│   │   └── interactable.gd
+│   │
+│   └── ui/                       # Menus and HUD logic
+│       ├── title_screen.gd
+│       ├── settings_menu.gd
+│       ├── pause_menu.gd
+│       ├── hud_controller.gd
+│       └── spell_selection.gd
+│
+├── resources/                    # Reusable Godot resources
+│   ├── spells/                   # Spell configurations (.tres)
+│   ├── enemies/                  # Enemy configurations
+│   └── levels/                   # Level configurations
+│
+├── shaders/                      # Custom visual effects
+│   ├── fire.gdshader
+│   ├── ice.gdshader
+│   └── perspective_effect.gdshader
+│
+└── docs/                         # Project documentation
+    ├── architecture.md
+    ├── coding_standards.md
+    └── team_responsibilities.md
+
+System Relationships
+
+                         Mage Skate
+                             │
+             ┌───────────────┴───────────────┐
+             │                               │
+        Core Systems                    User Interface
+             │                               │
+       Game Manager                   Title Screen / HUD
+             │
+       Level Manager
+             │
+       ┌─────┴──────────┐
+       │                │
+  2D Gameplay       3D Gameplay
+       │                │
+  Skate Movement    Exploration
+       │                │
+       └───────┬────────┘
+               │
+       Perspective Manager
+               │
+        Spellcasting System
+               │
+       ┌───────┴─────────┐
+       │                 │
+     Combat          World Puzzles
+       │                 │
+   Enemies/Bosses    Interactables
+       │
+  Health and Damage
+
+World Progression
+
+Elemental Tower
+    ├── Level 1
+    ├── Level 2
+    └── Boss Level
+          │
+          ▼
+Wicked Forest
+    ├── Level 1
+    ├── Level 2
+    └── Boss Level
+          │
+          ▼
+Lost Necropolis
+    ├── Level 1
+    ├── Level 2
+    └── Boss Level
+
+Each world contains two standard levels and one boss level, for a total of nine levels across three worlds.
+
+Design Principles
+
+* Modularity: Each major gameplay system has its own directory.
+* Reusability: Shared scenes and components minimize duplicated logic.
+* Separation of concerns: Gameplay logic, assets, scenes, and configuration resources are kept separate.
+* Extensibility: New spells, enemies, bosses, and levels can be added without redesigning the entire project.
+* Team collaboration: Developers can work on separate systems with clearly defined responsibilities.
+
+Note: This document describes the planned project architecture. Some files may initially be empty placeholders and should be implemented as development progresses.
